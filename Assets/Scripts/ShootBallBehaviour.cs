@@ -4,30 +4,36 @@ using UnityEngine.SceneManagement;
 
 public class ShootBallBehaviour : MonoBehaviour
 {
-    private float force = 5f;
-    private Rigidbody _rigidbody;
+    [SerializeField] private GameObject goalGateOneColliderGO;
+    [SerializeField] private GameObject goalGateTwoColliderGO;
+
+    private float forceX = 0f;
+    private float forceY = 5f;
+    private float forceZ = 10f;
+
+    private Rigidbody ballRB;
 
     private bool isLost;
-    [SerializeField] private TextMeshProUGUI lostRestartText;
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        ballRB = GetComponent<Rigidbody>();
     }
 
-    
-    
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.F) && PlayerBehaviour.Instance.canShoot)
         {
-            Score.CurrentScoreShoot = 0;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            ballRB.AddForce(PlayerBehaviour.Instance.gameObject.GetComponent<Rigidbody>().velocity +
+                            PlayerBehaviour.Instance.gameObject.transform.forward * 1000f);
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.F))
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == goalGateOneColliderGO.name || other.name == goalGateTwoColliderGO.name)
         {
-            _rigidbody.AddForce(0, force, force, ForceMode.Impulse);
+            Score.CurrentScoreShoot++;
         }
     }
 }

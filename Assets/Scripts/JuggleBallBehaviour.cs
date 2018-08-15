@@ -16,22 +16,12 @@ public class JuggleBallBehaviour : MonoBehaviour
         {
             //+1 to score
             Score.CurrentScoreJuggle++;
-            PlayerGUI.Instance.UpdateScoreGUI();
         }
         else if (other.name == floorGO.name)
         {
             //Lose
             PlayerGUI.Instance.ShowMessage("You lost! Press 'R' to Restart", new Color32(245, 57, 57, 255));
             isLost = true;
-        }
-    }
-    
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Score.CurrentScoreJuggle = 0;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

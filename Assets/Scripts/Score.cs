@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public static class Score 
+public static class Score
 {
     #region HighScoreJuggle
 
@@ -26,9 +26,9 @@ public static class Score
     {
         HighScoreJuggle = 0;
     }
-    
+
     #endregion
-    
+
     #region HighScoreShoot
 
     private static string highScoreShootKey = "HighScoreShoot";
@@ -53,7 +53,7 @@ public static class Score
     {
         HighScoreShoot = 0;
     }
-    
+
     #endregion
 
     #region CurrentScoreJuggle
@@ -71,11 +71,13 @@ public static class Score
             {
                 HighScoreJuggle = currentScoreJuggle;
             }
+
+            PlayerGUI.Instance.UpdateScoreGUI();
         }
     }
 
     #endregion
-    
+
     #region CurrentScoreShoot
 
     private static int currentScoreShoot;
@@ -91,6 +93,8 @@ public static class Score
             {
                 HighScoreShoot = currentScoreShoot;
             }
+
+            PlayerGUI.Instance.UpdateScoreGUI();
         }
     }
 
