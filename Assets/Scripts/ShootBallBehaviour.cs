@@ -15,11 +15,13 @@ public class ShootBallBehaviour : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
+    
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Score.CurrentScoreJuggle = 0;
+            Score.CurrentScoreShoot = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
