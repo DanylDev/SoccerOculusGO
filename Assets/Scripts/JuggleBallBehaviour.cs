@@ -7,6 +7,8 @@ public class JuggleBallBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject playerHeadGO;
     [SerializeField] private GameObject floorGO;
+    
+    private bool isLost;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,18 +16,15 @@ public class JuggleBallBehaviour : MonoBehaviour
         {
             //+1 to score
             Score.CurrentScoreJuggle++;
-            ScoreGUI.Instance.UpdateJuggleScoreGUI();
+            PlayerGUI.Instance.UpdateScoreGUI();
         }
         else if (other.name == floorGO.name)
         {
             //Lose
-            lostRestartText.gameObject.SetActive(true);
+            PlayerGUI.Instance.ShowMessage("You lost! Press 'R' to Restart", new Color32(245, 57, 57, 255));
             isLost = true;
         }
     }
-
-    private bool isLost;
-    [SerializeField] private TextMeshProUGUI lostRestartText;
     
     private void Update()
     {
