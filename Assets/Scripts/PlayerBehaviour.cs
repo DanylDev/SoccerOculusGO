@@ -28,15 +28,18 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void AfterShoot()
     {
-        if (other.gameObject.name == ballTriggerGO.name)
-        {
-            PlayerGUI.Instance.HideMessage();
-            canShoot = false;
-        }
+        PlayerGUI.Instance.HideMessage();
+        canShoot = false;
+        RemoveBallTrigger();
     }
-
+    
+    private void RemoveBallTrigger()
+    {
+        Destroy(ballTriggerGO);
+    }
+    
     private void Update()
     {
         if (ballTriggerGO != null)
@@ -46,9 +49,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Score.CurrentScoreJuggle = 0;
-            Score.CurrentScoreShoot = 0;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            ShootGameManager.Restart(true);
         }
     }
 }
